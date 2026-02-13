@@ -45,9 +45,9 @@ stage('Build Docker Image') {
                 sshagent(['ec2-ssh-key']) {
                     sh """
                         ssh -o StrictHostKeyChecking=no ec2-user@65.2.71.23 "
-                            docker pull ${IMAGE_NAME}:latest &&
+                           docker pull ${IMAGE_NAME}:${BUILD_NUMBER}
                             docker rm -f testapp || true &&
-                            docker run -d -p 80:80 --name testapp ${IMAGE_NAME}:latest
+                           docker run -d -p 80:80 --name app ${IMAGE_NAME}:${BUILD_NUMBER}
                         "
                     """
                 }
