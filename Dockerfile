@@ -1,3 +1,5 @@
-FROM alpine:latest
+FROM nginx:alpine
 
-CMD ["echo", "Hello from Docker!"]
+COPY index.html /usr/share/nginx/html/index.html
+
+EXPOSE 80
