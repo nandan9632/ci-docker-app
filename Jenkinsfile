@@ -31,16 +31,16 @@ stage('Deploy to EC2') {
     steps {
         sshagent(['ec2-ssh-key']) {
             sh """
-                ssh -o StrictHostKeyChecking=no ec2-user@65.2.71.23 "
-                    docker pull ${IMAGE_NAME}:${BUILD_NUMBER} &&
-                    docker rm -f testapp || true &&
-                    docker run -d --restart unless-stopped -p 80:80 \
-                    --name testapp ${IMAGE_NAME}:${BUILD_NUMBER}
-                "
+                ssh -o StrictHostKeyChecking=no ec2-user@65.2.71.23 '
+                    docker pull ${IMAGE_NAME}:${BUILD_NUMBER}
+                    docker rm -f app || true
+                    docker run -d --restart unless-stopped -p 80:80 --name app ${IMAGE_NAME}:${BUILD_NUMBER}
+                '
             """
         }
     }
 }
+
 
         stage('Deploy to EC2') {
             steps {
