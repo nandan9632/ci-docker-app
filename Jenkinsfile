@@ -4,16 +4,20 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                echo "Code pulled successfully"
+                checkout scm
             }
         }
 
-        stage('Build') {
+        stage('Build Docker Image') {
             steps {
-                echo "Building Docker app..."
+                sh 'docker build -t ci-docker-app .'
+            }
+        }
+
+        stage('Show Images') {
+            steps {
+                sh 'docker images'
             }
         }
     }
 }
-
-
