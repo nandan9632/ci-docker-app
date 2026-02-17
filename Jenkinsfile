@@ -2,7 +2,8 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = "nandan9632/ci-docker-app"
+     image: nandan9632/ci-docker-app:${BUILD_NUMBER}
+
     }
 
     stages {
@@ -46,8 +47,7 @@ stage('Deploy to EC2') {
             steps {
                 sshagent(['ec2-ssh-key']) {
                     sh """
-                        ssh -o StrictHostKeyChecking=no ec2-user@65.2.71.23 "
-                         ssh -o StrictHostKeyChecking=no ec2-user@YOUR_IP '
+                         ssh -o StrictHostKeyChecking=no ec2-user@15.207.116.12 '
     cd ~ &&
     docker-compose pull &&
     docker-compose up -d
