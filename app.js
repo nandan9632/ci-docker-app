@@ -1,17 +1,21 @@
 const express = require("express");
 const app = express();
 
+app.use(express.json());
+
 app.get("/", (req, res) => {
-  res.send("Hello from Backend 🚀");
+    res.json({ message: "Backend is running 🚀" });
 });
 
-app.get("/api", (req, res) => {
-  res.json({
-    message: "API is working 🚀",
-    status: "success"
-  });
+app.get("/api/users", (req, res) => {
+    res.json([
+        { id: 1, name: "Nandan" },
+        { id: 2, name: "DevOps Master" }
+    ]);
 });
 
-app.listen(3000, () => {
-  console.log("Server running on port 3000");
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 });
