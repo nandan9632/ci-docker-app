@@ -62,7 +62,7 @@ stage('Run Tests') {
                         ssh -o StrictHostKeyChecking=no ec2-user@${EC2_IP} '
                             docker pull ${IMAGE_NAME}:${BUILD_NUMBER}
                             docker rm -f app || true
-                            docker run -d --restart unless-stopped -p 80:80 --name app ${IMAGE_NAME}:${BUILD_NUMBER}
+                            docker run -d --restart unless-stopped -p 80:3000 --name app ${IMAGE_NAME}:${BUILD_NUMBER}
                         '
                     """
                 }
