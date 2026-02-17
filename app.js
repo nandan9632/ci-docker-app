@@ -1,16 +1,14 @@
-const express = require('express');
+const express = require("express");
 const app = express();
 
-app.use(express.json());
-
-app.get('/', (req, res) => {
-  res.send("Frontend route working ");
+app.get("/", (req, res) => {
+  res.send("Hello from Backend 🚀");
 });
 
-app.get('/api', (req, res) => {
+app.get("/api", (req, res) => {
   res.json({
-    status: "success",
-    message: "Backend API working bro "
+    message: "API is working 🚀",
+    status: "success"
   });
 });
 
