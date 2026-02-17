@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "description": "Simple app for Jenkins CI pipeline",
   "main": "app.js",
-  "scripts": {
-    "test": "echo \"Tests Passed\""
-  },
+ "scripts": {
+  "start": "node app.js",
+  "test": "echo Running tests... && exit 0"
+}
+
   "dependencies": {
     "express": "^4.18.2"
   }
