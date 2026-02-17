@@ -47,10 +47,12 @@ stage('Deploy to EC2') {
                 sshagent(['ec2-ssh-key']) {
                     sh """
                         ssh -o StrictHostKeyChecking=no ec2-user@65.2.71.23 "
-                           docker pull ${IMAGE_NAME}:${BUILD_NUMBER}
-                            docker rm -f testapp || true &&
-                           docker run -d -p 80:80 --name app ${IMAGE_NAME}:${BUILD_NUMBER}
-                        "
+                         ssh -o StrictHostKeyChecking=no ec2-user@YOUR_IP '
+    cd ~ &&
+    docker-compose pull &&
+    docker-compose up -d
+'
+
                     """
                 }
             }
