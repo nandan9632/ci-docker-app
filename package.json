@@ -4,6 +4,7 @@
   "description": "Simple app for Jenkins CI pipeline",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "test": "echo hello && exit 0"
   },
   "dependencies": {
