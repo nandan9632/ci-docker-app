@@ -1,21 +1,42 @@
-const express = require("express");
+const express = require('express');
 const app = express();
 
 app.use(express.json());
 
-app.get("/", (req, res) => {
-    res.json({ message: "Backend is running " });
+let users = [
+  { id: 1, name: "Nandan" },
+  { id: 2, name: "DevOps Master" }
+];
+
+// GET all users
+app.get('/api/users', (req, res) => {
+  res.json(users);
 });
 
-app.get("/api/users", (req, res) => {
-    res.json([
-        { id: 1, name: "Nandan" },
-        { id: 2, name: "DevOps Master" }
-    ]);
+// POST new user
+app.post('/api/users', (req, res) => {
+  const { name } = req.body;
+
+  if (!name) {
+    return res.status(400).json({ error: "Name is required" });
+  }
+
+  const newUser = {
+    id: users.length + 1,
+    name
+  };
+
+  users.push(newUser);
+
+  res.status(201).json(newUser);
 });
 
-const PORT = process.env.PORT || 3000;
+// Health check
+app.get('/health', (req, res) => {
+  res.status(200).send("OK");
+});
 
+const PORT = 80;
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
